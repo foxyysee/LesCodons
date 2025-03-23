@@ -1,0 +1,23 @@
+-------------------------------
+ PREDATOR-PREY SIMULATION VIEW
+--------- Help ----------------
+CC : current control (in red)
+MW : mouse wheel
+RM: mouse right button
+CP : cursor position
+-------------------------------
+Space	: toggle pause
+D	: toggle debug mode
+Tab     : toggle simulation view
+MW	: Zoom
+Esc	: close window
+C	: reload config. file
+Arrows	: move simulation view
+Q	: switch to next control
+PageUp	  : increase CC
+PageDown  : decrease CC
+R	: resets the simulation
+         (+ control values to default)
+S   : Add a scorpion at MP
+G   : Add a cactus at MP (groves)
+L   : add a lizard at MP

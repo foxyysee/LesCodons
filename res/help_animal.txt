@@ -1,0 +1,17 @@
+-------------------------------
+ ONLY WORKS IN STEP 2
+--------- Help ----------------
+CC : current control (in red)
+MW : mouse wheel
+RM: mouse right button
+CP : cursor position
+-------------------------------
+Space	: toggle pause
+D	: toggle debug mode
+MW	: Zoom
+Esc	: close window
+C	: reload config. file
+Arrows	: move simulation view
+R	: resets the simulation
+         + add an animal
+T   : Add a target at MP

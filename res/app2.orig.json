@@ -1,0 +1,193 @@
+{
+   "debug":false,
+   "simulation": {
+      "time":{
+         "factor":1,
+         "max dt":0.05
+      },
+       "cloud" : {
+	   "texture": "cloud.png",
+	   "min size" : 500,
+	   "max size" : 900,
+           "evaporation size" : 200,
+           "evaporation temperature" : 30,
+           "evaporation rate" : 0.001
+       },
+       "cloud generator": {
+	   "delta" : 4
+       },
+       "obstacle": {
+           "rock texture" : "rock.png"
+       },
+      "organic entity": {
+        "critical energy level" : 50
+      },
+      "food": {
+         "texture":"cactus-3.png",
+          "max energy": 200,
+          "energy": 100,
+          "size" : 30,
+          "growth rate" : 1.0005
+      },
+      "animal":{
+         "idle probability": 0.001,
+         "walking idle time": 2,
+         "low energy factor": 0.3,
+         "deceleration tweaker":0.3,
+         "flight coefficient":500.0,
+         "distance coefficient": 1.2,
+         "random walk low energy":false,
+         "meal retention": 2,
+         "feed time":0.4,
+	  "base consumption" : 0.1,
+          "eating pause time": 2.0,
+          "mating pause time": 3.0,
+          "delivery pause time": 10.0,
+	  "min energy" : 20,
+          "safe distance":1000,
+         "reproduction":{
+               "delivery time":10,
+               "mating time":5
+         },
+        "lizard":{
+            "mass":1,
+            "size":150,
+            "longevity":70000,
+	    "min age mating" : 5,
+            "max speed":80,
+            "reproduction":{
+               "gestation time":15,
+               "min children":1,
+               "max children":2
+            },
+            "view":{
+               "range":1.04719755,
+               "distance":450
+            },
+            "random walk":{
+               "jitter":2.0,
+               "radius":50,
+               "distance":160
+            },
+            "energy":{
+               "initial":80,
+               "min mating male":450,
+               "min mating female":800,
+               "loss mating male":200,
+             "loss female per child":100,
+               "loss factor":0.001
+            },
+	    "wave" : {
+		"frequency" : 0.3,
+		"loss factor": 0
+	    },
+            "texture":{
+               "male":"lizard_male.png",
+               "male down":"lizard_male_down.png",
+               "female":"lizard_female.png",
+		"female down":"lizard_female_down.png",
+		"hidden" : "lizard_hidden.png"
+            }
+         },
+         "scorpion":{
+            "mass":0.7,
+            "size":150,
+             "longevity":80000,
+	     "min age mating" : 5,
+            "max speed":100,
+            "rotation":{
+               "speed":1.570796327,
+               "angle precision":.125663706
+            },
+             "neuronal texture": "scorpion.png",
+             "neuronal idle time":5,
+             "neuronal moving time":3,
+            "score for action":50,
+            "reproduction":{
+               "gestation time":25,
+               "min children":1,
+               "max children":1
+            },
+            "view":{
+               "range":6.283185307,
+               "distance":300
+            },
+            "random walk":{
+               "jitter":5,
+               "radius":20,
+               "distance":100
+            },
+            "energy":{
+               "initial":120,
+               "min mating male":650,
+               "min mating female":2600,
+               "loss mating male":250,
+               "loss female per child":130,
+               "loss factor":0.001
+            },
+            "idle":{
+               "min":5,
+               "max":10,
+               "probability":0.05
+            },
+             "texture":"scorpion.png",
+	     "sensor radius" : 40
+         }
+      },
+       "sensor" : {
+	   "intensity threshold" : 0.7,
+	   "inhibition" : {
+	       "factor": 0.01,
+	       "max"   : 1
+	   },
+	   "activation duration" : 0.4
+       },
+       "wave" : {
+	   "intensity" : {
+	       "thickness ratio" : 0.6,
+	       "threshold" : 0.5
+	   },
+	   "on wave marging" : 30.0,
+	   "default energy" : 10000.0,
+	   "default radius" : 5.0,
+	   "default MU" : 10000,
+	   "default speed" : 800.0
+       },
+	       
+      "world":{
+          "size":600,
+	  "breeding delay" : 3,
+	  "max clouds" : 20,
+	  "proba raining" : 1,
+	  "raining cloud density": 0.7,
+          "raining duration": 10,
+          "drought duration": 20,
+          "humidity duration": 5,
+          "rain temperature": 20.0,
+         "texture":"sand.png",
+          "debug texture" :"sand.png",
+	  "temperature" : {
+            "default": 30,
+            "min": -10,
+            "max":70
+            }
+      }
+   },
+    "stats":{
+	"refresh rate":1
+    },
+    "window":{
+	"antialiasing level":4,
+        "title":"POOSV Simulation",
+	"simulation":{
+            "width":600,
+            "height":600
+	},
+	"stats":{
+            "width":1
+	},
+	"control":{
+            "width":300
+	}
+    }
+}

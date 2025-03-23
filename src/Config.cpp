@@ -1,0 +1,148 @@
+#include "Config.hpp"
+#include <JSON/JSONSerialiser.hpp>
+// window
+//Config::Config(std::string path) : mConfig(j::readFromFile(path))
+Config::Config (const j::Value& cfg): mConfig(cfg)
+, simulation_debug(mConfig["debug"].toBool())
+,window_simulation_width(mConfig["window"]["simulation"]["width"].toDouble())
+, window_simulation_height(mConfig["window"]["simulation"]["height"].toDouble())
+, window_stats_width(mConfig["window"]["stats"]["width"].toDouble())
+, window_control_width(mConfig["window"]["control"]["width"].toDouble())								   
+, window_title(mConfig["window"]["title"].toString())
+, window_antialiasing_level(mConfig["window"]["antialiasing level"].toInt())
+
+// stats
+, stats_refresh_rate(mConfig["stats"]["refresh rate"].toDouble())
+
+// simulation
+, simulation_world_texture(mConfig["simulation"]["world"]["texture"].toString())
+, simulation_world_debug_texture(mConfig["simulation"]["world"]["debug texture"].toString())
+, simulation_world_size(mConfig["simulation"]["world"]["size"].toDouble())
+, simulation_time_factor(mConfig["simulation"]["time"]["factor"].toDouble())
+, simulation_time_max_dt(sf::seconds(mConfig["simulation"]["time"]["max dt"].toDouble()))
+,environment_breeding_delay(mConfig["simulation"]["world"]["breeding delay"].toDouble())
+,environment_default_temperature(mConfig["simulation"]["world"]["temperature"]["default"].toDouble())
+ ,environment_min_temperature(mConfig["simulation"]["world"]["temperature"]["min"].toDouble())
+ ,environment_max_temperature(mConfig["simulation"]["world"]["temperature"]["max"].toDouble())
+,environment_max_clouds(mConfig["simulation"]["world"]["max clouds"].toInt())
+,environment_raining_cloud_density(mConfig["simulation"]["world"]["raining cloud density"].toDouble())
+,environment_raining_probability(mConfig["simulation"]["world"]["proba raining"].toDouble())
+, environment_raining_duration(mConfig["simulation"]["world"]["raining duration"].toDouble())
+, environment_drought_duration(mConfig["simulation"]["world"]["drought duration"].toDouble())
+, environment_humidity_duration(mConfig["simulation"]["world"]["humidity duration"].toDouble())
+, environment_rain_temperature(mConfig["simulation"]["world"]["rain temperature"].toDouble())
+// Organic entities
+, entity_energy_critical(mConfig["simulation"]["organic entity"]["critical energy level"].toDouble())
+// Organic entities)
+// cloud
+,cloud_texture(mConfig["simulation"]["cloud"]["texture"].toString())
+,cloud_min_size(mConfig["simulation"]["cloud"]["min size"].toDouble())
+,cloud_max_size(mConfig["simulation"]["cloud"]["max size"].toDouble())
+,cloud_evaporation_size(mConfig["simulation"]["cloud"]["evaporation size"].toDouble())
+,cloud_evaporation_rate(mConfig["simulation"]["cloud"]["evaporation rate"].toDouble())
+// cloud generator
+, cloud_generator_delta(mConfig["simulation"]["cloud generator"]["delta"].toDouble())
+, rock_texture(mConfig["simulation"]["obstacle"]["rock texture"].toString())
+// food
+,food_texture(mConfig["simulation"]["food"]["texture"].toString())
+,food_size(mConfig["simulation"]["food"]["size"].toDouble())
+,food_energy(mConfig["simulation"]["food"]["energy"].toDouble())
+,food_max_energy(mConfig["simulation"]["food"]["max energy"].toDouble())
+,food_growth_rate(mConfig["simulation"]["food"]["growth rate"].toDouble())
+// animal
+, animal_idle_probability(mConfig["simulation"]["animal"]["idle probability"].toDouble())
+, animal_walking_idle_time(mConfig["simulation"]["animal"]["walking idle time"].toDouble())
+, animal_low_energy_factor(mConfig["simulation"]["animal"]["low energy factor"].toDouble())
+, animal_deceleration_tweaker(mConfig["simulation"]["animal"]["deceleration tweaker"].toDouble())
+, animal_flight_coefficient(mConfig["simulation"]["animal"]["flight coefficient"].toDouble())
+, animal_distance_coefficient(mConfig["simulation"]["animal"]["distance coefficient"].toDouble())
+, animal_random_walk_low_energy(mConfig["simulation"]["animal"]["random walk low energy"].toBool())
+, animal_safe_distance(mConfig["simulation"]["animal"]["safe distance"].toDouble())
+, animal_meal_retention(mConfig["simulation"]["animal"]["meal retention"].toDouble())
+, animal_feed_time(mConfig["simulation"]["animal"]["feed time"].toDouble())
+, animal_delivery_time(mConfig["simulation"]["animal"]["reproduction"]["delivery time"].toDouble())
+, animal_mating_time(mConfig["simulation"]["animal"]["reproduction"]["mating time"].toDouble())
+, animal_min_energy(mConfig["simulation"]["animal"]["min energy"].toDouble())
+, animal_base_energy_consumption(mConfig["simulation"]["animal"]["base consumption"].toDouble())
+, animal_eating_pause_time(mConfig["simulation"]["animal"]["eating pause time"].toDouble())
+, animal_mating_pause_time(mConfig["simulation"]["animal"]["mating pause time"].toDouble())
+, animal_delivery_pause_time(mConfig["simulation"]["animal"]["delivery pause time"].toDouble())
+// lizard
+, lizard_max_speed(mConfig["simulation"]["animal"]["lizard"]["max speed"].toDouble())
+, lizard_mass(mConfig["simulation"]["animal"]["lizard"]["mass"].toDouble())
+, lizard_energy_loss_factor(mConfig["simulation"]["animal"]["lizard"]["energy"]["loss factor"].toDouble())
+, lizard_view_range(mConfig["simulation"]["animal"]["lizard"]["view"]["range"].toDouble())
+, lizard_view_distance(mConfig["simulation"]["animal"]["lizard"]["view"]["distance"].toDouble())
+, lizard_random_walk_jitter(mConfig["simulation"]["animal"]["lizard"]["random walk"]["jitter"].toDouble())
+, lizard_random_walk_radius(mConfig["simulation"]["animal"]["lizard"]["random walk"]["radius"].toDouble())
+, lizard_random_walk_distance(mConfig["simulation"]["animal"]["lizard"]["random walk"]["distance"].toDouble())
+, lizard_longevity(sf::seconds(mConfig["simulation"]["animal"]["lizard"]["longevity"].toDouble()))
+, lizard_energy_initial(mConfig["simulation"]["animal"]["lizard"]["energy"]["initial"].toDouble())
+, lizard_energy_min_mating_female(mConfig["simulation"]["animal"]["lizard"]["energy"]["min mating female"].toDouble())
+, lizard_energy_min_mating_male(mConfig["simulation"]["animal"]["lizard"]["energy"]["min mating male"].toDouble())
+, lizard_min_children(mConfig["simulation"]["animal"]["lizard"]["reproduction"]["min children"].toInt())
+, lizard_max_children(mConfig["simulation"]["animal"]["lizard"]["reproduction"]["max children"].toInt())
+, lizard_gestation_time(mConfig["simulation"]["animal"]["lizard"]["reproduction"]["gestation time"].toDouble())
+, lizard_energy_loss_female_per_child(mConfig["simulation"]["animal"]["lizard"]["energy"]["loss female per child"].toDouble())
+, lizard_energy_loss_mating_male(mConfig["simulation"]["animal"]["lizard"]["energy"]["loss mating male"].toDouble())
+, lizard_texture_male(mConfig["simulation"]["animal"]["lizard"]["texture"]["male"].toString())
+, lizard_texture_male_down(mConfig["simulation"]["animal"]["lizard"]["texture"]["male down"].toString())
+, lizard_texture_female(mConfig["simulation"]["animal"]["lizard"]["texture"]["female"].toString())
+, lizard_texture_female_down(mConfig["simulation"]["animal"]["lizard"]["texture"]["female down"].toString())
+, lizard_texture_hidden(mConfig["simulation"]["animal"]["lizard"]["texture"]["hidden"].toString())
+, lizard_size(mConfig["simulation"]["animal"]["lizard"]["size"].toDouble())
+, lizard_min_age_mating(mConfig["simulation"]["animal"]["lizard"]["min age mating"].toDouble())								   
+, wave_lizard_frequency(mConfig["simulation"]["animal"]["lizard"]["wave"]["frequency"].toDouble())
+, wave_lizard_energy_loss_factor(mConfig["simulation"]["animal"]["lizard"]["wave"]["loss factor"].toDouble())								   
+// scorpion
+, scorpion_max_speed(mConfig["simulation"]["animal"]["scorpion"]["max speed"].toDouble())
+, scorpion_mass(mConfig["simulation"]["animal"]["scorpion"]["mass"].toDouble())
+, scorpion_energy_loss_factor(mConfig["simulation"]["animal"]["scorpion"]["energy"]["loss factor"].toDouble())
+, scorpion_view_range(mConfig["simulation"]["animal"]["scorpion"]["view"]["range"].toDouble())
+, scorpion_view_distance(mConfig["simulation"]["animal"]["scorpion"]["view"]["distance"].toDouble())
+, scorpion_random_walk_jitter(mConfig["simulation"]["animal"]["scorpion"]["random walk"]["jitter"].toDouble())
+, scorpion_random_walk_radius(mConfig["simulation"]["animal"]["scorpion"]["random walk"]["radius"].toDouble())
+, scorpion_random_walk_distance(mConfig["simulation"]["animal"]["scorpion"]["random walk"]["distance"].toDouble())
+, scorpion_longevity(sf::seconds(mConfig["simulation"]["animal"]["scorpion"]["longevity"].toDouble()))
+, scorpion_energy_initial(mConfig["simulation"]["animal"]["scorpion"]["energy"]["initial"].toDouble())
+, scorpion_energy_min_mating_female(mConfig["simulation"]["animal"]["scorpion"]["energy"]["min mating female"].toDouble())
+, scorpion_energy_min_mating_male(mConfig["simulation"]["animal"]["scorpion"]["energy"]["min mating male"].toDouble())
+, scorpion_min_children(mConfig["simulation"]["animal"]["scorpion"]["reproduction"]["min children"].toInt())
+, scorpion_max_children(mConfig["simulation"]["animal"]["scorpion"]["reproduction"]["max children"].toInt())
+, scorpion_gestation_time(mConfig["simulation"]["animal"]["scorpion"]["reproduction"]["gestation time"].toDouble())
+, scorpion_energy_loss_female_per_child(mConfig["simulation"]["animal"]["scorpion"]["energy"]["loss female per child"].toDouble())
+, scorpion_energy_loss_mating_male(mConfig["simulation"]["animal"]["scorpion"]["energy"]["loss mating male"].toDouble())
+, scorpion_texture((mConfig["simulation"]["animal"]["scorpion"]["texture"].toString()))
+, scorpion_size(mConfig["simulation"]["animal"]["scorpion"]["size"].toDouble())
+,scorpion_min_age_mating(mConfig["simulation"]["animal"]["scorpion"]["min age mating"].toDouble())									   
+, scorpion_sensor_radius(mConfig["simulation"]["animal"]["scorpion"]["sensor radius"].toDouble())
+, scorpion_minimal_score_for_action(mConfig["simulation"]["animal"]["scorpion"]["score for action"].toDouble())
+, scorpion_rotation_angle_precision(mConfig["simulation"]["animal"]["scorpion"]["rotation"]["angle precision"].toDouble())
+, neuronal_scorpion_idle_time(mConfig["simulation"]["animal"]["scorpion"]["neuronal idle time"].toDouble())
+, neuronal_scorpion_moving_time(mConfig["simulation"]["animal"]["scorpion"]["neuronal moving time"].toDouble())
+, neuronal_scorpion_texture(mConfig["simulation"]["animal"]["scorpion"]["neuronal texture"].toString())									   
+// sensor
+,sensor_intensity_threshold(mConfig["simulation"]["sensor"]["intensity threshold"].toDouble())
+,sensor_inhibition_factor(mConfig["simulation"]["sensor"]["inhibition"]["factor"].toDouble())
+,sensor_inhibition_max(mConfig["simulation"]["sensor"]["inhibition"]["max"].toDouble())
+,sensor_activation_duration(mConfig["simulation"]["sensor"]["activation duration"].toDouble())								   
+//wave								   
+,wave_intensity_thickness_ratio(mConfig["simulation"]["wave"]["intensity"]["thickness ratio"].toDouble())
+,wave_intensity_threshold(mConfig["simulation"]["wave"]["intensity"]["threshold"].toDouble())
+,wave_on_wave_marging(mConfig["simulation"]["wave"]["on wave marging"].toDouble())
+,wave_default_energy(mConfig["simulation"]["wave"]["default energy"].toDouble())
+,wave_default_radius(mConfig["simulation"]["wave"]["default radius"].toDouble())
+,wave_default_mu(mConfig["simulation"]["wave"]["default MU"].toDouble())
+,wave_default_speed(mConfig["simulation"]["wave"]["default speed"].toDouble())
+{
+}
+
+// TODO : getter for debug
+void Config::switchDebug(){
+	mConfig["debug"] = j::boolean(!mConfig["debug"].toBool());
+	simulation_debug = mConfig["debug"].toBool();
+}
+
+bool Config::getDebug(){
+return simulation_debug;
+}
